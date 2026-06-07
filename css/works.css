@@ -407,3 +407,53 @@ video.work-item-video {
     transform: scale(1);
     animation: slideInActive 0.6s cubic-bezier(.77,0,.18,1) forwards;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* 🐟🐟🐟 */
+
+/* Desktop - նորմալ հորիզոնական video */
+.featured-work-item.has-video .work-item-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease; /* ✅ smooth fade-in */
+}
+
+.featured-work-item.has-video.video-playing .work-item-video.is-ready {
+    opacity: 1;
+}
+
+/* Mobile - vertical video rotation */
+@media (max-width: 768px) {
+    .featured-work-item.has-video .work-item-video {
+        width: 190%;
+        height: auto;
+        left: -45%;
+        top: 21%;
+        transform: rotate(270deg);
+        object-fit: unset;
+    }
+}
+
+.featured-work-item.has-video .work-item-top-shadow,
+.featured-work-item.has-video .work-item-bottom-info,
+.featured-work-item.has-video .work-item-bottom-shadow,
+.featured-work-item.has-video .work-item-click-overlay,
+.featured-work-item.has-video .work-item-progress-wrap {
+    z-index: 5;
+}

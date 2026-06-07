@@ -105,6 +105,7 @@ prevSlide() {
     }, { once: true });
 }
 
+
 _updateVideo() {
     if (!this._sectionVisible) return;
 
@@ -112,16 +113,23 @@ _updateVideo() {
         const video = slide.querySelector('video.work-item-video');
 
         if (idx !== this.currentIndex) {
-            // ✅ Ոչ active slide-երը - pause և reset
             if (video && !video.paused) video.pause();
+            // ✅ Reset to beginning when leaving active
+            if (video) {
+                video.currentTime = 0;
+                video.classList.remove('is-ready');
+            }
             slide.classList.remove('video-playing');
-            if (video) video.classList.remove('is-ready');
+            // ✅ Reset progress bar
+            const fill  = slide.querySelector('.work-item-progress-fill');
+            const thumb = slide.querySelector('.work-item-progress-thumb');
+            if (fill)  fill.style.width = '0%';
+            if (thumb) thumb.style.left = '0%';
             return;
         }
 
         if (!video) return;
 
-        // ✅ Video src-ը դնել ՄԻԱՅՆ եթե չկա - idle ժամանակ
         if (!video.src && video.dataset.src) {
             if ('requestIdleCallback' in window) {
                 requestIdleCallback(() => {
@@ -137,6 +145,8 @@ _updateVideo() {
                 }, 100);
             }
         } else if (video.src) {
+            // ✅ Reset և սկսել սկզբից
+            video.currentTime = 0;
             this._waitAndPlay(video, slide);
         }
     });
