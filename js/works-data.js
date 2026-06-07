@@ -50,7 +50,26 @@ const WORKS1 = [
         tag3_nl:  'Stage',
         tag3_en:  'Internship',
     },
+    // ✅ 4-րդ item
+    {
+        image:        './img/artworks/artwork-4-desktop.jpg',
+        image_mobile: './img/artworks/artwork-4-mobile.png',
+        video:        './img/artworks/artwork-4-video.mp4',
+        date:     "oct '24",
+        index:    'INDEX.04',
+        cat_key:  'cat-circus',
+        title_nl: 'Artwork 4',
+        title_en: 'Artwork 4',
+        desc_nl:  'Beschrijving van het vierde artwork.',
+        desc_en:  'Description of the fourth artwork.',
+        tag1_nl:  'Animatie',
+        tag1_en:  'Animation',
+        tag2:     '3D Animation',
+        tag3_nl:  'Kunst',
+        tag3_en:  'Art',
+    },
 ];
+
 
 const WORKS2 = [
     {
