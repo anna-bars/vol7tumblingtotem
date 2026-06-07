@@ -155,10 +155,10 @@ _waitAndPlay(video, slide) {
         this._startProgress(video, slide);
     };
 
-    if (video.readyState >= 3) {
+    if (video.readyState >= 2) {
         startVideo();
     } else {
-        video.addEventListener('canplay', startVideo, { once: true });
+        video.addEventListener('loadeddata', startVideo, { once: true });
     }
 }
 
