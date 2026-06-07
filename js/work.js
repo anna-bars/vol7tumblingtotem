@@ -67,44 +67,95 @@ class WorksSlider {
         });
     }
 
+nextSlide() {
+    if (this.track.dataset.animating === "true") return;
+    this.track.dataset.animating = "true";
+    this.currentIndex++;
+    this.centerSlide(true);
+    this.track.addEventListener("transitionend", () => {
+        if (this.currentIndex >= this.slides.length - 1) {
+            const first = this.slides.shift();
+            this.track.appendChild(first);
+            this.slides.push(first);
+            this.currentIndex--;
+            this._reorderAndRecenter();
+        }
+        // ✅ video-ն սկսել TRANSITION ավարտից հետո
+        this._updateVideo();
+        this.track.dataset.animating = "false";
+    }, { once: true });
+}
 
-    _updateVideo() {
+prevSlide() {
+    if (this.track.dataset.animating === "true") return;
+    this.track.dataset.animating = "true";
+    this.currentIndex--;
+    this.centerSlide(true);
+    this.track.addEventListener("transitionend", () => {
+        if (this.currentIndex <= 0) {
+            const last = this.slides.pop();
+            this.track.prepend(last);
+            this.slides.unshift(last);
+            this.currentIndex++;
+            this._reorderAndRecenter();
+        }
+        // ✅ video-ն սկսել TRANSITION ավարտից հետո
+        this._updateVideo();
+        this.track.dataset.animating = "false";
+    }, { once: true });
+}
+
+_updateVideo() {
     if (!this._sectionVisible) return;
 
     this.slides.forEach((slide, idx) => {
         const video = slide.querySelector('video.work-item-video');
 
-        if (idx === this.currentIndex) {
-            if (!video) return;
-
-            if (!video.src && video.dataset.src) {
-                video.src = video.dataset.src;
-                video.load();
-            }
-
-            // ✅ Transition ավարտից հետո video fade-in
-            setTimeout(() => {
-                const startVideo = () => {
-                    video.classList.add('is-ready');
-                    slide.classList.add('video-playing');
-                    const p = video.play();
-                    if (p) p.catch(() => {});
-                    this._startProgress(video, slide);
-                };
-
-                if (video.readyState >= 3) {
-                    startVideo();
-                } else {
-                    video.addEventListener('canplay', startVideo, { once: true });
-                }
-            }, 850);
-
-        } else {
+        if (idx !== this.currentIndex) {
+            // ✅ Ոչ active slide-երը - pause և reset
             if (video && !video.paused) video.pause();
             slide.classList.remove('video-playing');
             if (video) video.classList.remove('is-ready');
+            return;
+        }
+
+        if (!video) return;
+
+        // ✅ Video src-ը դնել ՄԻԱՅՆ եթե չկա - idle ժամանակ
+        if (!video.src && video.dataset.src) {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    video.src = video.dataset.src;
+                    video.load();
+                    this._waitAndPlay(video, slide);
+                });
+            } else {
+                setTimeout(() => {
+                    video.src = video.dataset.src;
+                    video.load();
+                    this._waitAndPlay(video, slide);
+                }, 100);
+            }
+        } else if (video.src) {
+            this._waitAndPlay(video, slide);
         }
     });
+}
+
+_waitAndPlay(video, slide) {
+    const startVideo = () => {
+        video.classList.add('is-ready');
+        slide.classList.add('video-playing');
+        const p = video.play();
+        if (p) p.catch(() => {});
+        this._startProgress(video, slide);
+    };
+
+    if (video.readyState >= 3) {
+        startVideo();
+    } else {
+        video.addEventListener('canplay', startVideo, { once: true });
+    }
 }
 
 
@@ -223,66 +274,6 @@ class WorksSlider {
         this.centerSlide(false);
     }
 
-
-    nextSlide() {
-    if (this.track.dataset.animating === "true") return;
-    this.track.dataset.animating = "true";
-    this.currentIndex++;
-
-    // ✅ Նախապես բեռնել հաջորդ slide-ի video-ն
-    const nextSlide = this.slides[this.currentIndex];
-    if (nextSlide) {
-        const nextVideo = nextSlide.querySelector('video.work-item-video');
-        if (nextVideo && !nextVideo.src && nextVideo.dataset.src) {
-            nextVideo.src = nextVideo.dataset.src;
-            nextVideo.load();
-        }
-    }
-
-    this.centerSlide(true);
-    this.track.addEventListener("transitionend", () => {
-        if (this.currentIndex >= this.slides.length - 1) {
-            const first = this.slides.shift();
-            this.track.appendChild(first);
-            this.slides.push(first);
-            this.currentIndex--;
-            this._reorderAndRecenter();
-        }
-        this._updateVideo();
-        this.track.dataset.animating = "false";
-    }, { once: true });
-}
-
-prevSlide() {
-    if (this.track.dataset.animating === "true") return;
-    this.track.dataset.animating = "true";
-    this.currentIndex--;
-
-    // ✅ Նախապես բեռնել նախորդ slide-ի video-ն
-    const prevSlide = this.slides[this.currentIndex];
-    if (prevSlide) {
-        const prevVideo = prevSlide.querySelector('video.work-item-video');
-        if (prevVideo && !prevVideo.src && prevVideo.dataset.src) {
-            prevVideo.src = prevVideo.dataset.src;
-            prevVideo.load();
-        }
-    }
-
-    this.centerSlide(true);
-    this.track.addEventListener("transitionend", () => {
-        if (this.currentIndex <= 0) {
-            const last = this.slides.pop();
-            this.track.prepend(last);
-            this.slides.unshift(last);
-            this.currentIndex++;
-            this._reorderAndRecenter();
-        }
-        this._updateVideo();
-        this.track.dataset.animating = "false";
-    }, { once: true });
-}
-
-  
 
     _toggleOverlay(clickedSlide) {
         const isRevealed = clickedSlide.classList.contains('is-revealed');
