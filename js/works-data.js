@@ -71,23 +71,6 @@ const WORKS1 = [
 
 const WORKS2 = [
     {
-        image:        './img/artworks/artwork-5-desktop.jpg',
-        image_mobile: './img/artworks/artwork-5-mobile.png',
-        video:        './img/artworks/artwork-5-video.mp4',
-        date:     "oct '24",
-        index:    'INDEX.01',
-        cat_key:  'cat-car',
-        title_nl: 'Offroad Voertuig',
-        title_en: 'Offroad Vehicle',
-        desc_nl:  'Een 3D-render van een versleten auto, gemaakt in Blender met behulp van Photoshop voor de materialen.',
-        desc_en:  'Offroad Vehicle Model - A 3D render of a worn down car, made in Blender with the help of Photoshop for the materials.',
-        tag1_nl:  '3D Render',
-        tag1_en:  '3D Render',
-        tag2:     'Blender',
-        tag3_nl:  'Voertuig',
-        tag3_en:  'Vehicle',
-    },
-    {
         image:        './img/artworks/artwork-6-desktop.png',
         image_mobile: './img/artworks/artwork-6-mobile.png',
         video:        './img/artworks/artwork-6-video.mp4',
@@ -103,6 +86,23 @@ const WORKS2 = [
         tag2:     'Blender',
         tag3_nl:  'Product',
         tag3_en:  'Product',
+    },
+    {
+        image:        './img/artworks/artwork-5-desktop.jpg',
+        image_mobile: './img/artworks/artwork-5-mobile.png',
+        video:        './img/artworks/artwork-5-video.mp4',
+        date:     "oct '24",
+        index:    'INDEX.01',
+        cat_key:  'cat-car',
+        title_nl: 'Offroad Voertuig',
+        title_en: 'Offroad Vehicle',
+        desc_nl:  'Een 3D-render van een versleten auto, gemaakt in Blender met behulp van Photoshop voor de materialen.',
+        desc_en:  'Offroad Vehicle Model - A 3D render of a worn down car, made in Blender with the help of Photoshop for the materials.',
+        tag1_nl:  '3D Render',
+        tag1_en:  '3D Render',
+        tag2:     'Blender',
+        tag3_nl:  'Voertuig',
+        tag3_en:  'Vehicle',
     },
     {
         image:        './img/artworks/artwork-7-desktop.png',
@@ -169,18 +169,25 @@ function buildTrackHTML(worksArray, lang, translations) {
         const poster   = (isMobile && w.image_mobile) ? w.image_mobile : w.image;
 
         // ✅ ՄԻՇՏ background-image - poster երևա մինչ video բեռնվի
-        const bgStyle = `style="background-image: url(${poster});"`;
+        // const bgStyle = `style="background-image: url(${poster});"`;
+// ✅ Video ունեցող items-ը background-image չունեն
+const bgStyle = hasVideo ? '' : `style="background-image: url(${poster});"`;
 
-        const videoHTML = hasVideo ? `
-            <video
-                class="work-item-video"
-                data-src="${w.video}"
-                poster="${poster}"
-                muted
-                loop
-                playsinline
-                preload="none"
-            ></video>` : '';
+       const videoHTML = hasVideo ? `
+    <img
+        class="work-item-poster"
+        src="${poster}"
+        alt="${title}"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;"
+    >
+    <video
+        class="work-item-video"
+        data-src="${w.video}"
+        muted
+        loop
+        playsinline
+        preload="none"
+    ></video>` : '';
 
         const progressHTML = hasVideo ? `
             <div class="work-item-progress-wrap">
