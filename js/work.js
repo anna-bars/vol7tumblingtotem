@@ -140,9 +140,13 @@ _updateVideo() {
                 }, 100);
             }
         } else if (video.src) {
-            video.currentTime = 0;
-            this._waitAndPlay(video, slide);
-        }
+    video.currentTime = 0;
+    video.classList.add('is-ready');
+    slide.classList.add('video-playing');
+    const p = video.play();
+    if (p) p.catch(() => {});
+    this._startProgress(video, slide);
+}
     });
 }
 
