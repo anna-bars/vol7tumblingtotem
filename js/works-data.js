@@ -183,7 +183,7 @@ const bgStyle = hasVideo ? '' : `style="background-image: url(${poster});"`;
         muted
         loop
         playsinline
-        preload="none"
+        preload="metadata"
     ></video>` : '';
 
         const progressHTML = hasVideo ? `
