@@ -457,3 +457,11 @@ video.work-item-video {
 .featured-work-item.has-video .work-item-progress-wrap {
     z-index: 5;
 }
+.featured-work-item.has-video.video-playing {
+    background-image: none !important;
+}
+.featured-work-item {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
