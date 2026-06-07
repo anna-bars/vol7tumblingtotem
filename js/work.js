@@ -44,7 +44,6 @@ class WorksSlider {
         this._bindSectionObserver();
     }
 
-    // ─── Section observer ────────────────────────────────────────────────────
     _bindSectionObserver() {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -80,7 +79,6 @@ nextSlide() {
             this.currentIndex--;
             this._reorderAndRecenter();
         }
-        // ✅ video-ն սկսել TRANSITION ավարտից հետո
         this._updateVideo();
         this.track.dataset.animating = "false";
     }, { once: true });
@@ -99,7 +97,6 @@ prevSlide() {
             this.currentIndex++;
             this._reorderAndRecenter();
         }
-        // ✅ video-ն սկսել TRANSITION ավարտից հետո
         this._updateVideo();
         this.track.dataset.animating = "false";
     }, { once: true });
@@ -114,13 +111,11 @@ _updateVideo() {
 
         if (idx !== this.currentIndex) {
             if (video && !video.paused) video.pause();
-            // ✅ Reset to beginning when leaving active
             if (video) {
                 video.currentTime = 0;
                 video.classList.remove('is-ready');
             }
             slide.classList.remove('video-playing');
-            // ✅ Reset progress bar
             const fill  = slide.querySelector('.work-item-progress-fill');
             const thumb = slide.querySelector('.work-item-progress-thumb');
             if (fill)  fill.style.width = '0%';
@@ -145,7 +140,6 @@ _updateVideo() {
                 }, 100);
             }
         } else if (video.src) {
-            // ✅ Reset և սկսել սկզբից
             video.currentTime = 0;
             this._waitAndPlay(video, slide);
         }
@@ -187,7 +181,6 @@ _waitAndPlay(video, slide) {
         this._rafId = requestAnimationFrame(tick);
     }
 
-    // ─── Progress scrub ──────────────────────────────────────────────────────
     _bindProgressScrub() {
         this.track.addEventListener('mousedown', e => {
             const hit = e.target.closest('.work-item-progress-hit, .work-item-progress');
@@ -217,7 +210,6 @@ _waitAndPlay(video, slide) {
         });
     }
 
-    // ─── Cursor ──────────────────────────────────────────────────────────────
     lerp(a, b, t) { return a + (b - a) * t; }
 
     _animateCursor() {
@@ -249,7 +241,6 @@ _waitAndPlay(video, slide) {
         this._setLabel('SWIPE');
     }
 
-    // ─── Slide state ─────────────────────────────────────────────────────────
     updateClasses() {
         this.slides.forEach(s =>
             s.classList.remove("is-active", "is-prev", "is-next", "is-revealed"));
@@ -258,7 +249,6 @@ _waitAndPlay(video, slide) {
         this.slides[this.currentIndex + 1]?.classList.add("is-next");
     }
 
-    // ✅ ՀԻՆ centerSlide - անփոփոխ
   centerSlide(animated = true) {
     const active = this.slides[this.currentIndex];
     const offset =
@@ -277,7 +267,6 @@ _waitAndPlay(video, slide) {
 }
 
 
-    // ✅ ՀԻՆ _reorderAndRecenter - անփոփոխ
     _reorderAndRecenter() {
         this.track.style.transition = "none";
         this.track.style.transform  = "translateX(0px)";
@@ -296,7 +285,6 @@ _waitAndPlay(video, slide) {
     _bindEvents() {
     const zone = this.cursorZone;
 
-    // velocity tracking
     this._velX = 0;
     this._lastX = 0;
     this._lastT = 0;
@@ -371,11 +359,10 @@ _waitAndPlay(video, slide) {
     window.addEventListener("mouseup", e => {
         if (!this.isDragging) return;
         const diff = e.clientX - this.startX;
-        const vel  = this._velX; // px/ms
+        const vel  = this._velX;
         this.cursor.classList.remove("is-dragging");
         this.cursor.style.setProperty("--drag-offset", "0px");
 
-        // ✅ velocity կամ distance-ով որոշել
         if (Math.abs(diff) < 8 && Math.abs(vel) < 0.3) {
             if (this._clickTarget) this._toggleOverlay(this._clickTarget);
         } else if (vel < -0.2 || diff < -60) {
@@ -390,7 +377,6 @@ _waitAndPlay(video, slide) {
         if (active && this.isHoveringActive) this._onEnterActive();
     });
 
-    // Touch - նույն velocity տրամաբանությամբ
     zone.addEventListener("touchstart", e => {
         this.isDragging = true;
         this.startX     = e.touches[0].clientX;

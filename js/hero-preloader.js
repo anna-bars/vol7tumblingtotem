@@ -20,7 +20,6 @@
         './img/hero/fog/fog-triangle-top.png',
     ];
 
-    // --- Styles injected into <head> immediately (sync, before any paint) ---
     const style = document.createElement('style');
     style.textContent = `
         body.tt-loading { overflow: hidden; }
@@ -65,13 +64,10 @@
     `;
     document.head.appendChild(style);
 
-    // Dark background on <html> immediately — visible even before body parses
     document.documentElement.style.background = '#060e10';
 
-    // --- Everything touching document.body waits for DOM ---
     document.addEventListener('DOMContentLoaded', function () {
 
-        // Show body (was hidden by tt-init-hide in <head>) — loader will cover it
         document.body.style.visibility = 'visible';
         const initHide = document.getElementById('tt-init-hide');
         if (initHide) initHide.remove();

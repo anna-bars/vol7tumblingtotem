@@ -99,7 +99,6 @@ function animate() {
     const progress = Math.min(currentScroll / window.innerHeight, 1);
     const move = isMobile ? progress * 240 : progress * 450;
 
-    // Reduced mouse strength
     const mouseStrength = isMobile ? 1.5 : 3;
 
     const apply = (el, d) => {

@@ -168,9 +168,6 @@ function buildTrackHTML(worksArray, lang, translations) {
         const hasVideo = !!w.video;
         const poster   = (isMobile && w.image_mobile) ? w.image_mobile : w.image;
 
-        // ✅ ՄԻՇՏ background-image - poster երևա մինչ video բեռնվի
-        // const bgStyle = `style="background-image: url(${poster});"`;
-// ✅ Video ունեցող items-ը background-image չունեն
 const bgStyle = hasVideo ? '' : `style="background-image: url(${poster});"`;
 
        const videoHTML = hasVideo ? `
