@@ -1,0 +1,162 @@
+.contact {
+    background-color: #060e10;
+    background-image: url(../img/contact/contact-back.png);
+    background-size: cover;
+    height: 134vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.front-bottom-layer-01 {
+    width: 100%;
+    position: absolute;
+    bottom: -2%;
+    z-index: 111;
+}
+
+.front-layer-top-leaves-02 {
+    width: 100%;
+    position: absolute;
+    top: 29px;
+    z-index: 111;
+}
+.front-layer-top-02 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 112;
+}
+
+.top-arch-03 {
+    width: 100%;
+    position: absolute;
+    top: 5%;
+    z-index: 108;
+}
+.left-arch-04 {
+    height: 62%;
+    position: absolute;
+    left: 0%;
+    bottom: 12%;
+    z-index: 107;
+    width: 17%;
+}
+.right-arch-05 {
+    height: 62%;
+    position: absolute;
+    right: 0%;
+    bottom: 13%;
+    z-index: 106;
+    width: 15.5%;
+}
+
+.totem-06 { 
+    height: 57%;
+    position: absolute;
+    bottom: 5%;
+     left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 105;
+
+}
+.layer-light-07-1 {
+    position: absolute;
+    z-index: 104;
+    width: 29%;
+    left: 35%;
+    top: 23%;
+}
+
+.totem-light-07 {
+    position: absolute;
+    z-index: 103;
+    height: 80%;
+    top: 0;
+    left: 39.7%;
+    width: 20%;
+}
+
+.totem-left-arch-08 {
+    position: absolute;
+    height: 82%;
+    top: 12%;
+    left: 24.3%;
+    z-index: 102;
+    width: 14.4%;
+}
+.totem-right-arch-08 {
+    position: absolute;
+    height: 82%;
+    top: 10%;
+    right: 24.3%;
+    z-index: 102;
+    width: 14.4%;
+}
+.back-arch-darker-09 {
+    position: absolute;
+    width: 96%;
+    z-index: 100;
+    top: 5%;
+    left: 2%;
+    height: 81%;
+}
+.back-arch-lighter-10 {
+    position: absolute;
+    width: 82%;
+    z-index: 80;
+    top: 10%;
+    left: 9%;
+    height: 78%;
+}
+.contact-inscription {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    bottom: 11%;
+}
+.inscription-label {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: rgba(210, 185, 140, 0.5);
+    text-transform: uppercase;
+    font-family: 'ADVENTURES';
+    font-weight: 400;
+}
+
+.inscription-email {
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: rgba(230, 205, 155, 0.82);
+    text-transform: lowercase;
+    font-family: 'ADVENTURES';
+    font-weight: 300;
+    text-decoration: none;
+    text-shadow:
+        0 0 18px rgba(255, 210, 120, 0.35),
+        0 0 40px rgba(255, 180, 60, 0.15);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.inscription-email:hover {
+    color: rgba(255, 225, 170, 1);
+    text-shadow:
+        0 0 22px rgba(255, 210, 120, 0.6),
+        0 0 60px rgba(255, 180, 60, 0.3);
+}
+
+
+
+
+
+
+
+
+
+.contact-wrapper { background: #060e10; }

@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+        font-family: 'Urbanist';
+
+}
+.hero {
+height: 108svh;
+    background-image: url(./img/hero/background.webp);
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    overflow-x: hidden;
+}
+.hero-hint-cta-text {
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    bottom: 9.5%;
+    z-index: 98;
+    display: flex;
+    padding: 0 2.5%;
+    justify-content: space-between;
+}
+.hero-hint-cta-text p {
+    color: #ffffff9c;
+    font-style: italic;
+}
+.hero-cont {
+}
+.heroo {
+    background: #1C617A;
+    position: relative;
+    overflow: hidden;
+}
+.bottom-mask {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 4%;
+    background: #0f171b;
+    z-index: 4;
+    pointer-events: none;
+}
+.layer-1-sky,
+.layer-2-mountains,
+.layer-3-hills-back,
+.layer-4-temple,
+.layer-5-jungle-mid,
+.layer-6-jungle-front,
+.layer-7-foreground,
+.leaves-left,
+.leaves-right {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+.logo {
+    width: 410px;
+    display: block;
+    margin: auto;
+    padding-top: 75px;
+}
+
+.leaves-left {
+    width: 23%;
+    position: absolute;
+    top: -2%;
+    left: -2%;
+    z-index: 24;
+    will-change: transform;
+}
+.leaves-right {
+    width: 23%;
+    position: absolute;
+    top: -2%;
+    right: -2%;
+    z-index: 24;
+    will-change: transform;
+}
+
+/* layers */
+
+
+.layer-1-sky {
+    width: 100%;
+    position: absolute;
+    bottom: 28%;
+    z-index: 1;
+}
+.bottom-line {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+.layer-2-mountains {
+    width: 100%;
+    position: absolute;
+    bottom: 19%;
+    z-index: 2;
+}
+.layer-7-foreground {
+    width: 100%;
+    position: absolute;
+    top: 64svh;
+    z-index: 7;
+}
+.layer-3-hills-back {
+    width: 100%;
+    position: absolute;
+    bottom: 7%;
+    z-index: 3;
+}
+.layer-4-temple {
+    width: 28%;
+    position: absolute;
+    z-index: 4;
+    top: 52svh;
+     left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+.layer-5-jungle-mid {
+    width: 100%;
+    position: absolute;
+    top: 53svh;
+    z-index: 5;
+}
+.layer-6-jungle-front {
+    width: 100%;
+    position: absolute;
+    top: 74svh;
+    z-index: 6;
+}
+
+.darkness {
+    position: absolute;
+    width: 100%;
+    z-index: 45;
+    height: 100%;
+}
+
+.fog_olips_left {
+    width: 20%;
+    position: absolute;
+    left: 0;
+}
+.fog_olips_right {
+    width: 20%;
+    position: absolute;
+    right: 0;
+}
+
+.fog-triangle-left {
+    width: 12%;
+    position: absolute;
+    left: 5%;
+    bottom: 14%;
+}
+.fog-triangle-right {
+    width: 11%;
+    position: absolute;
+    right: 4%;
+    bottom: 7%;
+}
+.fog-triangle-top {
+    width: 12%;
+    position: absolute;
+    right: 7%;
+    bottom: 12%;
+
+}
+
+
+
+
+
+.foreground {}
+
+
+
+/* ABOUT SECTION */
+
+.about {
+    position: relative;
+    padding: 145px 2.5%;
+    background: url(./img/about/abbackground.webp);
+    margin-top: -8px;
+}
+.about-section-top-divider {
+    position: absolute;
+    top: -66px;
+    left: 0;
+    right: 0;
+    z-index: 140;
+     transition: top 0.1s ease;
+}
+.about-section-top-divider.scrolled {
+    top: -141px;
+}
+.about-section-bottom-divider {
+    position: absolute;
+    bottom: -66px;
+    z-index: 140;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+.spec-divider-cont img {
+        mix-blend-mode: screen;
+        width: 62px;
+
+}
+
+.spec-divider-cont {
+    display: flex;
+    justify-content: space-between;
+}
+.spec-divider-cont:nth-child(2n) {
+    margin-top: 24px;
+}
+
+
+.about-text {
+    width: 82%;
+    margin: auto;
+}
+h1 {
+    color: white;
+    font-weight: 500;
+    font-size: 48px;  
+    font-family: 'ADVENTURES';
+}
+.about-second-cont {
+    width: 44%;
+    margin-left: auto;
+    display: flex;
+    margin-right: 15%;
+    margin-top: 32px;
+}
+.about-second-cont p {
+    color: #ffeded6a;
+    font-size: 20px;
+}
+.about-second-cont span {
+    display: flex;
+    width: 34%;
+    height: fit-content;
+    color: #ffeded6a;
+    border: 1px solid #ffeded6a;
+    border-radius: 44px;
+    padding: 8px 16px;
+}
+.leaves-left {
+    transform-origin: left top;
+}
+
+.leaves-right {
+    transform-origin: right top;
+}
+

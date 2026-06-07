@@ -1,0 +1,487 @@
+@media (max-width: 1440px) {
+    .layer-4-temple {
+        width: 34%;
+    }
+    .layer-7-foreground {
+        width: 100%;
+        position: absolute;
+        z-index: 7;
+    }
+    .about-section-top-divider.scrolled {
+        top: -112px;
+    }
+    .heroo::before {
+        height: 6%;
+    }
+    .front-bottom-layer-01 {
+        bottom: 0%;
+    }
+    .front-layer-top-02 {
+        height: 35%;
+    }
+    .front-layer-top-leaves-02 {
+        height: 44%;
+    }
+    .top-arch-03 {
+        top: 4.5%;
+        height: 22%;
+    }
+    .contact {
+        height: 110vh;
+    }
+    .left-arch-04 {
+        height: 66%;
+    }
+    .right-arch-05 {
+        height: 66%;
+    }
+    .layer-5-jungle-mid {
+        top: 59svh;
+    }
+    .layer-7-foreground {
+        top: 58svh;
+    }
+}
+
+@media (max-width: 1220px) {
+    .layer-7-foreground {
+        top: 74svh;
+    }
+    .layer-5-jungle-mid {
+        top: 69svh;
+    }
+    .layer-4-temple {
+        top: 64svh;
+    }
+    .layer-6-jungle-front {
+        top: 83svh;
+    }
+    .about-section-top-divider.scrolled {
+        top: -97px;
+    }
+    .about-second-cont {
+        width: 63%;
+    }
+    .left-arch-04 {
+        height: 70%;
+        bottom: 10%;
+    }
+    .right-arch-05 {
+        height: 70%;
+        bottom: 10%;
+    }
+    .heroo::before {
+        height: 91%;
+    }
+    .bottom-mask {
+        z-index: 9;
+    }
+}
+
+@media (max-width: 1024px) {
+    .leaves-left, .leaves-right {
+        width: 28%;
+    }
+    .layer-4-temple {
+        width: 42%;
+        top: 64svh !important;
+    }
+    .logo {
+        width: 45%;
+    }
+    .layer-7-foreground {
+        top: 76svh;
+    }
+    .layer-5-jungle-mid {
+    top: 73.5svh;
+}
+.layer-4-temple {
+    top: 68svh;
+}
+    .about-section-top-divider.scrolled {
+        top: -42px;
+    }
+    .front-bottom-layer-01 {
+        bottom: 0%;
+        height: 31%;
+    }
+    .totem-light-07 {
+        left: 38%;
+        width: 23%;
+    }
+    .totem-left-arch-08 {
+        left: 18.3%;
+        width: 18.4%;
+    }
+    .totem-right-arch-08 {
+        right: 18.3%;
+        width: 18.4%;
+    }
+    h1 {
+        font-size: 38px;
+    }
+    .about-second-cont {
+        width: 84%;
+        margin-right: 0%;
+    }
+    .featured-work-item {
+        height: 68vh;
+    }
+    .totem-06 { 
+        height: 51%;
+        bottom: 5%;
+
+    }
+    .work-item-bottom-info {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        display: flex;
+        justify-content: stretch;
+        align-items: baseline;
+        z-index: 5;
+        color: white;
+        flex-direction: column-reverse;
+        gap: 6px;
+    }
+    .layer-2-mountains {
+        bottom: 21%;
+    }
+    .layer-3-hills-back {
+        bottom: 13%;
+    }
+    .fog_olips_left, .fog_olips_right {
+        bottom: 25%;
+    }
+}
+
+@media (max-width: 768px) {
+    .leaves-left, .leaves-right {
+        width: 44%;
+    }
+    .logo {
+        padding-top: 145px;
+    }
+   .about-second-cont span {
+    font-size: 13px;
+    width: fit-content;
+   }
+.about-text .about-second-cont p {
+    width: 79%;
+}
+    .totem-06 {
+        height: 44%;
+        bottom: 4%;
+    }
+
+    .contact {
+        height: 98vh;
+    }
+    .about-second-cont {
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .totem-light-07 {
+        left: 35%;
+        width: 28%;
+    }
+    .totem-left-arch-08 {
+        left: 13.3%;
+        width: 20.4%;
+        top: 10%;
+    }
+    .totem-right-arch-08 {
+        right: 10.3%;
+        width: 24.4%;
+        top: 10%;
+    }
+    .top-arch-03 {
+        top: 5.5%;
+        height: 16%;
+    }
+    .front-layer-top-leaves-02 {
+        height: 34%;
+    }
+    .back-arch-darker-09 {
+        width: 96%;
+        top: 2%;
+        left: 2%;
+        height: 84%;
+    }
+    .back-arch-lighter-10 {
+        width: 82%;
+        top: 9%;
+        left: 9%;
+        height: 74%;
+    }
+    .spec-divider-cont img {
+        width: 40px;
+    }
+    .layer-light-07-1 {
+top: auto;
+    left: 35%;
+    bottom: 33%;
+}
+.hero {
+    height: 104svh !important;
+}
+
+}
+@media (max-width: 600px) {
+        .featured-work-item {
+        height: 80vh;
+    width: 82vw;
+    }
+    .layer-4-temple {
+        width: 59%;
+        top: 60svh !important;
+    }
+        .leaves-left, .leaves-right {
+        width: 49%;
+    }
+        .logo {
+        padding-top: 127px;
+    }
+    .layer-1-sky {
+    bottom: 36%;
+    height: 15%;
+    border-bottom: 14px solid #19556a;
+    }
+    .layer-2-mountains {
+        bottom: 33%;
+        height: 12%;
+        border-bottom: 24px solid #17485a;
+    }
+.layer-3-hills-back {
+        bottom: 25%;
+        height: 15%;
+        border-bottom: 24px solid #143c4a;
+    }
+        .layer-5-jungle-mid {
+        top: 72.5svh;
+        height: 23%;
+    }
+        .layer-6-jungle-front {
+        top: 81svh;
+    }
+    .layer-7-foreground {
+        top: 79svh;
+    }
+        .contact {
+        height: 93vh;
+    }
+    .about-section-top-divider {
+        width: 100%;
+    transform: scaleY(1.5);
+    top: -30px;
+    }
+    .about-section-bottom-divider {
+        transform: scaleY(1.5);
+    bottom: -30px;
+    }
+    .work-item-bottom-info-title {
+    font-size: 24px;
+    }
+    .work-item-bottom-info-tags p {
+    font-size: 10px;
+    }
+    .work-item-top-info-category {
+    font-size: 13px;
+    }
+    .work-item-top-info-data {
+    font-size: 14px;
+    }
+    .featured-works-title {
+    padding: 0 5.5%;
+    font-size: 32px;
+    }
+    .hero-hint-cta-text p {
+    font-size: 14px;
+    padding: 0 !important;
+    }
+    .hero-hint-cta-text {
+
+    padding: 0 5.5%;
+    }
+        h1 {
+        font-size: 32px;
+    }
+    .about-second-cont p {
+    color: #ffeded6a;
+    font-size: 16px;
+}
+.about-second-cont p {
+    color: #ffeded6a;
+    font-size: 14px;
+}
+.about {
+    position: relative;
+    padding: 70px 5.5%;
+}
+    .back-arch-lighter-10 {
+        top: 7%;
+        left: 8%;
+        height: 74%;
+    }
+        .back-arch-darker-09 {
+        width: 98%;
+        top: 2%;
+        left: 2%;
+        height: 84%;
+    }
+    .layer-5-jungle-mid {
+        top: 69.5svh;
+        height: 23%;
+    }
+}
+
+@media (max-width: 425px) {
+           .contact {
+        transform: scale(1.2);
+    }
+        .contact-wrapper {
+        overflow: hidden;
+        height: 107vh;
+    }
+    .leaves-left, .leaves-right {
+        width: 54%;
+    }
+        .logo {
+        width: 50%;
+    }
+    .contact-wrapper {
+    background-color: #0d161a;
+}
+.inscription-email {
+    font-size: 14px;
+}
+}
+@media (max-width: 375px){
+        .layer-4-temple {
+        width: 58%;
+        top: 62svh !important;
+    }
+        .layer-1-sky {
+        bottom: 33%;
+        height: 14%;
+    }
+    .layer-2-mountains {
+        bottom: 31%;
+    }
+        .layer-3-hills-back {
+        bottom: 23%;
+        height: 15%;
+    }
+        .contact {
+        height: 89vh;
+    }
+        .contact-wrapper {
+        height: 98vh;
+    }
+    .layer-5-jungle-mid {
+        top: 70.5svh;
+        height: 23%;
+    }
+        .layer-4-temple {
+        width: 59%;
+        top: 62svh !important;
+    }
+}
+@media (max-width: 320px){
+        .logo {
+        width: 54%;
+    }
+        .layer-1-sky {
+        bottom: 36%;
+        height: 12%;
+    }
+    .layer-2-mountains {
+        bottom: 31%;
+    }
+        .layer-4-temple {
+        width: 68%;
+        top: 62svh !important;
+    }
+        .layer-5-jungle-mid {
+        top: 69.5svh;
+        height: 21%;
+    }
+        .layer-6-jungle-front {
+        top: 80svh;
+    }
+        .layer-7-foreground {
+        top: 84svh;
+    }
+    .hero-hint-cta-text p {
+        padding: 0 !important;
+        font-size: 12px;
+    }
+    .about-second-cont span {
+        padding: 4px 12px;
+    }
+    .about {
+        padding: 50px 5.5%;
+    }
+    .about-section-top-divider {
+        top: -12px;
+    }
+        .about-section-bottom-divider {
+        bottom: -12px;
+    }
+    .featured-works {
+        padding: 62px 0 32px 0;
+    }
+        .featured-works-title {
+        font-size: 24px;
+        margin-bottom: 28px;
+    }
+    .featured-works-title span {
+        font-size: 24px;
+    }
+        .featured-work-item {
+        height: 77vh;
+        width: 80vw;
+    }
+    .contact {
+        height: 72vh;
+        transform: scale(1.2);
+    }
+    .contact-wrapper {
+        background-color: #0d161a;
+        overflow: hidden;
+        height: 77vh;
+    }
+    
+}
+@media (max-width: 280){
+        h1 {
+        font-size: 22px;
+    }
+        .featured-works {
+        padding: 34px 0 32px 0;
+    }
+    .inscription-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    }
+        .inscription-email {
+        font-size: 10px;
+    }
+}
+@media (max-width: 768px) and (min-height: 900px) {
+    .layer-1-sky {
+        bottom: 32%;
+    }
+    .layer-2-mountains {
+        bottom: 27%;
+    }
+        .layer-3-hills-back {
+        bottom: 20%;
+    }
+        .layer-4-temple {
+        width: 46%;
+        top: 66svh !important;
+    }
+}

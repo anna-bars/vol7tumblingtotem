@@ -1,0 +1,14 @@
+
+.about-text h1 .word {
+    display: inline-block;
+    will-change: opacity, transform;
+    font-family: 'ADVENTURES';
+}
+
+.about-text .about-second-cont p {
+    will-change: opacity, transform;
+}
+
+.about-text .about-second-cont span {
+    will-change: opacity, transform;
+}
