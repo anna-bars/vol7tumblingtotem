@@ -42,20 +42,20 @@
 
 .featured-work-item {
     flex-shrink: 0;
-
     width: 65vw;
     height: 94vh;
-
     border-radius: 18px;
     overflow: hidden;
     position: relative;
-
     background-size: cover;
     background-position: center;
-
     transition:
         transform .6s ease,
         opacity .6s ease;
+    
+    /* ✅ Ավելացրու սա */
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .featured-work-item.is-active {

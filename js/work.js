@@ -67,21 +67,23 @@ class WorksSlider {
         });
     }
 
-    // ─── Video ───────────────────────────────────────────────────────────────
+
     _updateVideo() {
-        if (!this._sectionVisible) return;
+    if (!this._sectionVisible) return;
 
-        this.slides.forEach((slide, idx) => {
-            const video = slide.querySelector('video.work-item-video');
+    this.slides.forEach((slide, idx) => {
+        const video = slide.querySelector('video.work-item-video');
 
-            if (idx === this.currentIndex) {
-                if (!video) return;
+        if (idx === this.currentIndex) {
+            if (!video) return;
 
-                if (!video.src && video.dataset.src) {
-                    video.src = video.dataset.src;
-                    video.load();
-                }
+            if (!video.src && video.dataset.src) {
+                video.src = video.dataset.src;
+                video.load();
+            }
 
+            // ✅ Transition ավարտից հետո video fade-in
+            setTimeout(() => {
                 const startVideo = () => {
                     video.classList.add('is-ready');
                     slide.classList.add('video-playing');
@@ -94,16 +96,17 @@ class WorksSlider {
                     startVideo();
                 } else {
                     video.addEventListener('canplay', startVideo, { once: true });
-                    const p = video.play();
-                    if (p) p.catch(() => {});
                 }
-            } else {
-                if (video && !video.paused) video.pause();
-                slide.classList.remove('video-playing');
-                if (video) video.classList.remove('is-ready');
-            }
-        });
-    }
+            }, 850);
+
+        } else {
+            if (video && !video.paused) video.pause();
+            slide.classList.remove('video-playing');
+            if (video) video.classList.remove('is-ready');
+        }
+    });
+}
+
 
     _startProgress(video, slide) {
         if (this._rafId) { cancelAnimationFrame(this._rafId); this._rafId = null; }
@@ -220,43 +223,66 @@ class WorksSlider {
         this.centerSlide(false);
     }
 
-    // ✅ ՀԻՆ nextSlide - + _updateVideo կանչ
+
     nextSlide() {
-        if (this.track.dataset.animating === "true") return;
-        this.track.dataset.animating = "true";
-        this.currentIndex++;
-        this.centerSlide(true);
-        this.track.addEventListener("transitionend", () => {
-            if (this.currentIndex >= this.slides.length - 1) {
-                const first = this.slides.shift();
-                this.track.appendChild(first);
-                this.slides.push(first);
-                this.currentIndex--;
-                this._reorderAndRecenter();
-            }
-            this._updateVideo();
-            this.track.dataset.animating = "false";
-        }, { once: true });
+    if (this.track.dataset.animating === "true") return;
+    this.track.dataset.animating = "true";
+    this.currentIndex++;
+
+    // ✅ Նախապես բեռնել հաջորդ slide-ի video-ն
+    const nextSlide = this.slides[this.currentIndex];
+    if (nextSlide) {
+        const nextVideo = nextSlide.querySelector('video.work-item-video');
+        if (nextVideo && !nextVideo.src && nextVideo.dataset.src) {
+            nextVideo.src = nextVideo.dataset.src;
+            nextVideo.load();
+        }
     }
 
-    // ✅ ՀԻՆ prevSlide - + _updateVideo կանչ
-    prevSlide() {
-        if (this.track.dataset.animating === "true") return;
-        this.track.dataset.animating = "true";
-        this.currentIndex--;
-        this.centerSlide(true);
-        this.track.addEventListener("transitionend", () => {
-            if (this.currentIndex <= 0) {
-                const last = this.slides.pop();
-                this.track.prepend(last);
-                this.slides.unshift(last);
-                this.currentIndex++;
-                this._reorderAndRecenter();
-            }
-            this._updateVideo();
-            this.track.dataset.animating = "false";
-        }, { once: true });
+    this.centerSlide(true);
+    this.track.addEventListener("transitionend", () => {
+        if (this.currentIndex >= this.slides.length - 1) {
+            const first = this.slides.shift();
+            this.track.appendChild(first);
+            this.slides.push(first);
+            this.currentIndex--;
+            this._reorderAndRecenter();
+        }
+        this._updateVideo();
+        this.track.dataset.animating = "false";
+    }, { once: true });
+}
+
+prevSlide() {
+    if (this.track.dataset.animating === "true") return;
+    this.track.dataset.animating = "true";
+    this.currentIndex--;
+
+    // ✅ Նախապես բեռնել նախորդ slide-ի video-ն
+    const prevSlide = this.slides[this.currentIndex];
+    if (prevSlide) {
+        const prevVideo = prevSlide.querySelector('video.work-item-video');
+        if (prevVideo && !prevVideo.src && prevVideo.dataset.src) {
+            prevVideo.src = prevVideo.dataset.src;
+            prevVideo.load();
+        }
     }
+
+    this.centerSlide(true);
+    this.track.addEventListener("transitionend", () => {
+        if (this.currentIndex <= 0) {
+            const last = this.slides.pop();
+            this.track.prepend(last);
+            this.slides.unshift(last);
+            this.currentIndex++;
+            this._reorderAndRecenter();
+        }
+        this._updateVideo();
+        this.track.dataset.animating = "false";
+    }, { once: true });
+}
+
+  
 
     _toggleOverlay(clickedSlide) {
         const isRevealed = clickedSlide.classList.contains('is-revealed');
