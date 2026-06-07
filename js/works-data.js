@@ -1,7 +1,7 @@
 const WORKS1 = [
     {
-        image:        './img/artworks/artwork-1-desktop.png',
-        image_mobile: './img/artworks/artwork-1-mobile.png',
+        image:        './img/artworks/artwork-1-desktop.webp',
+        image_mobile: './img/artworks/artwork-1-mobile.webp',
         video:        './img/artworks/artwork-1-video.mp4',
         date:     "oct '24",
         index:    'INDEX.01',
@@ -17,8 +17,8 @@ const WORKS1 = [
         tag3_en:  'Circus',
     },
     {
-        image:        './img/artworks/artwork-2-desktop.png',
-        image_mobile: './img/artworks/artwork-2-mobile.png',
+        image:        './img/artworks/artwork-2-desktop.webp',
+        image_mobile: './img/artworks/artwork-2-mobile.webp',
         video:        './img/artworks/artwork-2-video.mp4',
         date:     "oct '24",
         index:    'INDEX.02',
@@ -34,8 +34,8 @@ const WORKS1 = [
         tag3_en:  'Procedural',
     },
     {
-        image:        './img/artworks/artwork-3-desktop.png',
-        image_mobile: './img/artworks/artwork-3-mobile.png',
+        image:        './img/artworks/artwork-3-desktop.webp',
+        image_mobile: './img/artworks/artwork-3-mobile.webp',
         video:        './img/artworks/artwork-3-video.mp4',
         date:     "oct '24",
         index:    'INDEX.03',
@@ -51,8 +51,8 @@ const WORKS1 = [
         tag3_en:  'Internship',
     },
     {
-        image:        './img/artworks/artwork-4-desktop.jpg',
-        image_mobile: './img/artworks/artwork-4-mobile.png',
+        image:        './img/artworks/artwork-4-desktop.webp',
+        image_mobile: './img/artworks/artwork-4-mobile.webp',
         video:        './img/artworks/artwork-4-video.mp4',
         date:     "oct '24",
         index:    'INDEX.04',
@@ -71,8 +71,8 @@ const WORKS1 = [
 
 const WORKS2 = [
     {
-        image:        './img/artworks/artwork-6-desktop.png',
-        image_mobile: './img/artworks/artwork-6-mobile.png',
+        image:        './img/artworks/artwork-6-desktop.webp',
+        image_mobile: './img/artworks/artwork-6-mobile.webp',
         video:        './img/artworks/artwork-6-video.mp4',
         date:     "oct '24",
         index:    'INDEX.02',
@@ -88,8 +88,8 @@ const WORKS2 = [
         tag3_en:  'Product',
     },
     {
-        image:        './img/artworks/artwork-5-desktop.jpg',
-        image_mobile: './img/artworks/artwork-5-mobile.png',
+        image:        './img/artworks/artwork-5-desktop.webp',
+        image_mobile: './img/artworks/artwork-5-mobile.webp',
         video:        './img/artworks/artwork-5-video.mp4',
         date:     "oct '24",
         index:    'INDEX.01',
@@ -105,8 +105,8 @@ const WORKS2 = [
         tag3_en:  'Vehicle',
     },
     {
-        image:        './img/artworks/artwork-7-desktop.png',
-        image_mobile: './img/artworks/artwork-7-mobile.png',
+        image:        './img/artworks/artwork-7-desktop.webp',
+        image_mobile: './img/artworks/artwork-7-mobile.webp',
         date:     "oct '24",
         index:    'INDEX.03',
         cat_key:  'cat-robot',
@@ -121,8 +121,8 @@ const WORKS2 = [
         tag3_en:  'Robot',
     },
     {
-        image:        './img/artworks/artwork-8-desktop.png',
-        image_mobile: './img/artworks/artwork-8-mobile.png',
+        image:        './img/artworks/artwork-8-desktop.webp',
+        image_mobile: './img/artworks/artwork-8-mobile.webp',
         date:     "oct '24",
         index:    'INDEX.04',
         cat_key:  'cat-treehouse',
@@ -137,8 +137,8 @@ const WORKS2 = [
         tag3_en:  'Environment',
     },
     {
-        image:        './img/artworks/artwork-9-desktop.png',
-        image_mobile: './img/artworks/artwork-9-mobile.png',
+        image:        './img/artworks/artwork-9-desktop.webp',
+        image_mobile: './img/artworks/artwork-9-mobile.webp',
         date:     "oct '24",
         index:    'INDEX.05',
         cat_key:  'cat-abstract',
