@@ -249,22 +249,23 @@ _waitAndPlay(video, slide) {
     }
 
     // ✅ ՀԻՆ centerSlide - անփոփոխ
-    centerSlide(animated = true) {
-        const active = this.slides[this.currentIndex];
-        const offset =
-            active.offsetLeft -
-            (window.innerWidth / 2) +
-            (active.offsetWidth / 2);
+  centerSlide(animated = true) {
+    const active = this.slides[this.currentIndex];
+    const offset =
+        active.offsetLeft -
+        (window.innerWidth / 2) +
+        (active.offsetWidth / 2);
 
-        this.track.style.transition = animated
-            ? "transform .8s cubic-bezier(.77,0,.18,1)"
-            : "none";
-        this.track.style.transform = `translateX(${-offset}px)`;
-        this.updateClasses();
-        this.isHoveringActive = false;
-        clearTimeout(this._hoverTimer);
-        this._setLabel('SWIPE');
-    }
+    this.track.style.transition = animated
+        ? "transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+        : "none";
+    this.track.style.transform = `translateX(${-offset}px)`;
+    this.updateClasses();
+    this.isHoveringActive = false;
+    clearTimeout(this._hoverTimer);
+    this._setLabel('SWIPE');
+}
+
 
     // ✅ ՀԻՆ _reorderAndRecenter - անփոփոխ
     _reorderAndRecenter() {
@@ -281,107 +282,143 @@ _waitAndPlay(video, slide) {
         if (!isRevealed) clickedSlide.classList.add('is-revealed');
     }
 
-    // ─── Events ──────────────────────────────────────────────────────────────
-    _bindEvents() {
-        const zone = this.cursorZone;
 
-        zone.addEventListener("mouseenter", () => {
+    _bindEvents() {
+    const zone = this.cursorZone;
+
+    // velocity tracking
+    this._velX = 0;
+    this._lastX = 0;
+    this._lastT = 0;
+
+    zone.addEventListener("mouseenter", () => {
+        this.cursor.classList.add("is-visible");
+    });
+    zone.addEventListener("mouseleave", () => {
+        this.cursor.classList.remove("is-visible", "is-dragging");
+        this.isDragging = false;
+        if (this.isHoveringActive) {
+            this.isHoveringActive = false;
+            this._onLeaveActive();
+        }
+    });
+
+    window.addEventListener("mousemove", e => {
+        this.cursorX = e.clientX;
+        this.cursorY = e.clientY;
+
+        if (e.target.closest('.work-item-progress-wrap')) {
+            this.cursor.classList.remove("is-visible");
+            return;
+        } else if (this.cursorZone.contains(e.target)) {
             this.cursor.classList.add("is-visible");
-        });
-        zone.addEventListener("mouseleave", () => {
-            this.cursor.classList.remove("is-visible", "is-dragging");
-            this.isDragging = false;
-            if (this.isHoveringActive) {
+        }
+
+        if (this.isDragging) {
+            const now = Date.now();
+            const dt  = now - this._lastT;
+            if (dt > 0) {
+                this._velX = (e.clientX - this._lastX) / dt;
+            }
+            this._lastX = e.clientX;
+            this._lastT = now;
+
+            const move = e.clientX - this.startX;
+            this.cursor.style.setProperty("--drag-offset", `${move * 0.18}px`);
+            return;
+        }
+
+        const active = this.slides[this.currentIndex];
+        if (active) {
+            const rect = active.getBoundingClientRect();
+            const over =
+                e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top  && e.clientY <= rect.bottom;
+            if (over && !this.isHoveringActive) {
+                this.isHoveringActive = true;
+                this._onEnterActive();
+            } else if (!over && this.isHoveringActive) {
                 this.isHoveringActive = false;
                 this._onLeaveActive();
             }
-        });
+        }
+    });
 
-        window.addEventListener("mousemove", e => {
-            this.cursorX = e.clientX;
-            this.cursorY = e.clientY;
+    zone.addEventListener("mousedown", e => {
+        if (e.target.closest('.work-item-progress-wrap')) return;
+        this.isDragging = true;
+        this.startX     = e.clientX;
+        this._velX      = 0;
+        this._lastX     = e.clientX;
+        this._lastT     = Date.now();
+        this.cursor.classList.add("is-dragging");
+        clearTimeout(this._hoverTimer);
+        this.cursorLabel.style.opacity = '1';
+        this.cursorLabel.innerHTML = 'SWIPE';
+        this._clickTarget = this.slides.find(s => s.contains(e.target)) || null;
+    });
 
-            // progress bar-ի վրա cursor-ը թաքցնել
-            if (e.target.closest('.work-item-progress-wrap')) {
-                this.cursor.classList.remove("is-visible");
-                return;
-            } else if (this.cursorZone.contains(e.target)) {
-                this.cursor.classList.add("is-visible");
-            }
+    window.addEventListener("mouseup", e => {
+        if (!this.isDragging) return;
+        const diff = e.clientX - this.startX;
+        const vel  = this._velX; // px/ms
+        this.cursor.classList.remove("is-dragging");
+        this.cursor.style.setProperty("--drag-offset", "0px");
 
-            if (this.isDragging) {
-                const move = e.clientX - this.startX;
-                this.cursor.style.setProperty("--drag-offset", `${move * 0.18}px`);
-                return;
-            }
+        // ✅ velocity կամ distance-ով որոշել
+        if (Math.abs(diff) < 8 && Math.abs(vel) < 0.3) {
+            if (this._clickTarget) this._toggleOverlay(this._clickTarget);
+        } else if (vel < -0.2 || diff < -60) {
+            this.nextSlide();
+        } else if (vel > 0.2 || diff > 60) {
+            this.prevSlide();
+        }
 
-            const active = this.slides[this.currentIndex];
-            if (active) {
-                const rect = active.getBoundingClientRect();
-                const over =
-                    e.clientX >= rect.left && e.clientX <= rect.right &&
-                    e.clientY >= rect.top  && e.clientY <= rect.bottom;
+        this.isDragging = false;
+        this._clickTarget = null;
+        const active = this.slides[this.currentIndex];
+        if (active && this.isHoveringActive) this._onEnterActive();
+    });
 
-                if (over && !this.isHoveringActive) {
-                    this.isHoveringActive = true;
-                    this._onEnterActive();
-                } else if (!over && this.isHoveringActive) {
-                    this.isHoveringActive = false;
-                    this._onLeaveActive();
-                }
-            }
-        });
+    // Touch - նույն velocity տրամաբանությամբ
+    zone.addEventListener("touchstart", e => {
+        this.isDragging = true;
+        this.startX     = e.touches[0].clientX;
+        this._velX      = 0;
+        this._lastX     = e.touches[0].clientX;
+        this._lastT     = Date.now();
+        this._clickTarget = this.slides.find(s => s.contains(e.target)) || null;
+    }, { passive: true });
 
-        zone.addEventListener("mousedown", e => {
-            if (e.target.closest('.work-item-progress-wrap')) return;
-            this.isDragging = true;
-            this.startX = e.clientX;
-            this.cursor.classList.add("is-dragging");
-            clearTimeout(this._hoverTimer);
-            this.cursorLabel.style.opacity = '1';
-            this.cursorLabel.innerHTML = 'SWIPE';
-            this._clickTarget = this.slides.find(s => s.contains(e.target)) || null;
-        });
+    window.addEventListener("touchmove", e => {
+        if (!this.isDragging) return;
+        const now = Date.now();
+        const dt  = now - this._lastT;
+        if (dt > 0) {
+            this._velX = (e.touches[0].clientX - this._lastX) / dt;
+        }
+        this._lastX = e.touches[0].clientX;
+        this._lastT = now;
+    }, { passive: true });
 
-        window.addEventListener("mouseup", e => {
-            if (!this.isDragging) return;
-            const diff = e.clientX - this.startX;
-            this.cursor.classList.remove("is-dragging");
-            this.cursor.style.setProperty("--drag-offset", "0px");
+    window.addEventListener("touchend", e => {
+        if (!this.isDragging) return;
+        const diff = e.changedTouches[0].clientX - this.startX;
+        const vel  = this._velX;
 
-            if (Math.abs(diff) < 10) {
-                if (this._clickTarget) this._toggleOverlay(this._clickTarget);
-            } else if (diff < -80) {
-                this.nextSlide();
-            } else if (diff > 80) {
-                this.prevSlide();
-            }
+        if (Math.abs(diff) < 8 && Math.abs(vel) < 0.3) {
+            if (this._clickTarget) this._toggleOverlay(this._clickTarget);
+        } else if (vel < -0.2 || diff < -60) {
+            this.nextSlide();
+        } else if (vel > 0.2 || diff > 60) {
+            this.prevSlide();
+        }
 
-            this.isDragging = false;
-            this._clickTarget = null;
-            const active = this.slides[this.currentIndex];
-            if (active && this.isHoveringActive) this._onEnterActive();
-        });
+        this.isDragging = false;
+        this._clickTarget = null;
+    });
 
-        zone.addEventListener("touchstart", e => {
-            this.isDragging = true;
-            this.startX = e.touches[0].clientX;
-            this._clickTarget = this.slides.find(s => s.contains(e.target)) || null;
-        });
-        window.addEventListener("touchend", e => {
-            if (!this.isDragging) return;
-            const diff = e.changedTouches[0].clientX - this.startX;
-            if (Math.abs(diff) < 10) {
-                if (this._clickTarget) this._toggleOverlay(this._clickTarget);
-            } else if (diff < -80) {
-                this.nextSlide();
-            } else if (diff > 80) {
-                this.prevSlide();
-            }
-            this.isDragging = false;
-            this._clickTarget = null;
-        });
+    window.addEventListener("resize", () => this.centerSlide(false));
+}
 
-        window.addEventListener("resize", () => this.centerSlide(false));
-    }
 }
