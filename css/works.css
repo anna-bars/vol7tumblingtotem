@@ -447,5 +447,5 @@ video.work-item-video {
 }
 .featured-work-item.has-video.video-playing .work-item-poster {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.2s ease;
 }
